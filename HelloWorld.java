@@ -3,14 +3,17 @@
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
+import java.util.Map;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
 public class HelloWorld {
+    private static Map<String, String> env;
 
     public static void main(String[] args) throws Exception {
+	env = System.getenv();
 	int port = Integer.parseInt(System.getProperty("helloworld.port"));
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
         server.createContext("/", new MyHandler());
@@ -21,7 +24,22 @@ public class HelloWorld {
     static class MyHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange t) throws IOException {
-            String response = "<html><body><h1>Hello Criteo !!</h1></body></html>\n";
+	    // Displaying Hello message
+	    String hello = "Hello Criteo !!";
+	    String lang = env.get("HELLO_LANG");
+	    if (lang != null && lang.equals("FR")) {
+		hello = "Bonjour Criteo !!";
+	    }
+            String response = "<html><body><h1>" + hello + "</h1>\n";
+
+	    // Displaying environment variables
+	    response += "<h2>Environment variables:</h2><ul>\n";
+	    for (String envName : env.keySet()) {
+		response += "<li>" + envName + '=' + env.get(envName) + "</li>\n";
+	    }
+	    response += "</ul></body></html>\n";
+
+	    // Sending response
             t.sendResponseHeaders(200, response.length());
             OutputStream os = t.getResponseBody();
             os.write(response.getBytes());
