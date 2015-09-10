@@ -3,13 +3,16 @@
   "cmd": "java -Dhelloworld.port=$PORT0 -jar HelloWorld.jar",
   "cpus": 0.1,
   "mem": 16,
-  "instances": 1,
+  "instances": 2,
   "ports": [0],
   "healthChecks": [{
     "path": "/",
     "portIndex": 0,
     "protocol": "HTTP"
   }],
+  "env": {
+    "HELLO_LANG": "EN"
+  },
   "uris": [
     "https://storage.sbg-1.runabove.io/v1/AUTH_07c794077c014229b50290a459e8274b/public/HelloWorld.jar"
   ]
