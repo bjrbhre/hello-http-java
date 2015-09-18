@@ -1,6 +1,6 @@
 {
   "id": "hello",
-  "cmd": "java -Dhelloworld.port=$PORT0 -jar HelloWorld.jar",
+  "cmd": "java -Xmx16m Dhelloworld.port=$PORT0 -jar HelloWorld.jar",
   "cpus": 0.1,
   "mem": 16,
   "instances": 2,
@@ -8,7 +8,8 @@
   "healthChecks": [{
     "path": "/",
     "portIndex": 0,
-    "protocol": "HTTP"
+    "protocol": "HTTP",
+    "intervalSeconds": 5
   }],
   "env": {
     "HELLO_LANG": "EN"
