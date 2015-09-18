@@ -3,7 +3,7 @@
   "cmd": "java -Xmx16m -Dhelloworld.port=$PORT0 -jar HelloWorld.jar",
   "cpus": 0.1,
   "mem": 16,
-  "instances": 2,
+  "instances": 3,
   "ports": [0],
   "healthChecks": [{
     "path": "/",
