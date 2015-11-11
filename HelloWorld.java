@@ -24,6 +24,9 @@ public class HelloWorld {
     static class MyHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange t) throws IOException {
+	    // Logging IP address of request to stdout
+	    System.out.println("Request received from: " + t.getRemoteAddress().toString());
+
 	    // Displaying Hello message
 	    String hello = "Hello Criteo !!";
 	    String lang = env.get("HELLO_LANG");
