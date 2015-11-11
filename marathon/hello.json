@@ -1,8 +1,14 @@
 {
   "id": "hello",
-  "cmd": "java -Xmx16m -Dhelloworld.port=$PORT0 -jar HelloWorld.jar",
-  "cpus": 0.1,
-  "mem": 16,
+  "user": "hello",
+  "args": [
+    "/bin/bash",
+    "wrapme.sh",
+    "-c",
+    "java -Xmx16m -Dhelloworld.port=$PORT0 -jar HelloWorld.jar"
+  ],
+  "cpus": 1,
+  "mem": 128,
   "instances": 3,
   "ports": [0],
   "healthChecks": [{
@@ -11,8 +17,13 @@
     "protocol": "HTTP",
     "intervalSeconds": 5
   }],
+  "labels": {
+    "DNS_ENTRY": "www.public.domain",
+    "VISIBILITY": "PUBLIC"
+  },
   "env": {
-    "HELLO_LANG": "EN"
+    "HELLO_LANG": "EN",
+    "SECRET_STUFF": "qdUdqS4WB73UIuUKU7EPCylS9v/FmlcbWxw+tja9JHn2W3gNZmb3TyRSFhNAMPUqUEqs55CEiki8+Ldp5Gnq1UCQhz0P+hdMpj+dMcZEo6DyrHwMZVjQDIqP59l7qxASxTG/RUN8qWhV3y20RrHy2upwJYNI99bivbCIZE4GwXtBdMEI3/GX6x+QdU2LLMly0tKxY3G+jj1pzbEAw5F3WIi2e3318JrX9/tSPaPtkJMO6PNJwda3UdIu5X6ZtQ0itbzc8JLwl2hqXMlyZJd+A7FkwiRZ++H9sSIYKat34FKSX9gpjaRKZNxZxat+jjoqZbETuPLb8PNReT8ojzO5/A=="
   },
   "uris": [
     "https://storage.sbg-1.runabove.io/v1/AUTH_07c794077c014229b50290a459e8274b/public/HelloWorld.jar"
